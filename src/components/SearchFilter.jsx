@@ -1,4 +1,10 @@
+import { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
 const SearchFilter = () => {
+  const [startDate, setStartDate] = useState(new Date());
+
   return (
     <>
       <div className="border rounded-md p-10 my-10">
@@ -24,10 +30,12 @@ const SearchFilter = () => {
               </span>
             </label>
             <label className="input-group">
-              <input
-                type="text"
-                placeholder="Select Date"
-                className="placeholder:text-xl focus:outline-none placeholder:text-black placeholder:uppercase py-2 text-xl"
+              <DatePicker
+                closeOnScroll={true}
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+                className="focus:outline-none text-semibold"
+                dateFormat="dd/MM/yyyy"
               />
             </label>
           </div>
