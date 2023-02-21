@@ -1,9 +1,19 @@
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Select from "react-select";
 
 const SearchFilter = () => {
   const [startDate, setStartDate] = useState(new Date());
+  const [selectedOption, setSelectedOption] = useState(null);
+
+  const options = [
+    { value: "Movable", label: "Movable" },
+    { value: "Immovable", label: "Tangible" },
+    { value: "Real", label: "Real" },
+    { value: "Tangible", label: "Tangible" },
+    { value: "Intangible", label: "Intangible " },
+  ];
 
   return (
     <>
@@ -19,7 +29,8 @@ const SearchFilter = () => {
               <input
                 type="text"
                 placeholder="KATHMANDU, NEPAL"
-                className="placeholder:text-xl focus:outline-none placeholder:text-black py-2 text-xl"
+                className="placeholder:text-xl focus:outline-none placeholder:text-semibold 
+                text-semibold  placeholder:text-black py-2 text-xl"
               />
             </label>
           </div>
@@ -34,12 +45,12 @@ const SearchFilter = () => {
                 closeOnScroll={true}
                 selected={startDate}
                 onChange={(date) => setStartDate(date)}
-                className="focus:outline-none text-semibold"
+                className="focus:outline-none text-semibold py-2"
                 dateFormat="dd/MM/yyyy"
               />
             </label>
           </div>
-          <div className="px-3 border-r-2">
+          <div className="px-3 border-r-2 ">
             <label className="label p-0">
               <span className="uppercase font-semibold text-[#a3a3a3]">
                 Price
@@ -47,9 +58,10 @@ const SearchFilter = () => {
             </label>
             <label className="input-group">
               <input
-                type="text"
-                placeholder="$500 - $2,500"
-                className="placeholder:text-xl focus:outline-none placeholder:text-black placeholder:uppercase py-2 text-xl"
+                type="range"
+                min="0"
+                max="100"
+                className="range range-secondary py-2"
               />
             </label>
           </div>
@@ -60,14 +72,17 @@ const SearchFilter = () => {
               </span>
             </label>
             <label className="input-group">
-              <input
-                type="text"
-                placeholder="Select"
-                className="focus:outline-none placeholder:text-xl placeholder:text-black placeholder:uppercase py-2 text-xl"
+              <Select
+                defaultValue={selectedOption}
+                onChange={setSelectedOption}
+                options={options}
+                className="uppercase font-semibold w-52"
+                placeholder="Select Type"
+                isSearchable={true}
               />
             </label>
           </div>
-          <button type="submit" className="btn text-xl ">
+          <button type="submit" className="btn text-xl flex-auto py-2">
             Search
           </button>
         </form>
